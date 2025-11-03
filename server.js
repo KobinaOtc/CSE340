@@ -11,7 +11,7 @@ const env = require("dotenv").config();
 const app = express();
 const static = require("./routes/static");
 const expressLayouts = require('express-ejs-layouts');
-const { renderContent } = require("/js/script.js");
+const { renderContent, renderReviews } = require("./public/js/script");
 
 
 /* ***********************
@@ -27,7 +27,11 @@ app.set('layout', './layouts/layout')
 app.use(static);
 // Index route
 app.get('/', function(req, res) {
-  res.render('index', {title: 'Home', content: renderContent()})
+  res.render('index', {
+    title: 'Home',
+    content: renderContent(),
+    reviews: renderReviews(),
+  })
 });
 
 /* ***********************
