@@ -17,12 +17,16 @@ const expressLayouts = require('express-ejs-layouts');
  *************************/
 app.set('view engine', 'ejs')
 app.use(expressLayouts)
-app.set('layout', './layout/layout')
+app.set('layout', './layouts/layout')
 
 /* ***********************
  * Routes
  *************************/
-app.use(static)
+app.use(static);
+// Index route
+app.get('/', function(req, res) {
+  res.render('index', {title: 'Home'})
+});
 
 /* ***********************
  * Local Server Information
