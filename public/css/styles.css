@@ -22,6 +22,35 @@
   color: black;
 }
 
+/* Navigation styles start */
+nav {
+  background-color: #2b2b3a; /* Dark gray/black background for the nav bar */
+  padding: 0;
+}
+
+nav ul {
+  list-style: none; /* Remove bullet points */
+  display: flex; /* Arrange list items horizontally */
+  justify-content: space-around; /* Start items from the left */
+  margin: 0; /* Remove default margin */
+}
+
+nav ul li {
+  padding: 15px 20px; /* Spacing inside each menu item */
+}
+
+nav ul li a {
+  text-decoration: none; /* Remove underline from links (assuming they will be links) */
+  color: #fff; /* White text color */
+  font-weight: 500;
+  font-size: 1em;
+}
+
+/* Style for text inside the list item, assuming the li contains the text */
+nav ul li {
+    color: #fff; /* Apply white text color to the list text */
+}
+
 @media (min-width: 768px) {
   body {
     background-image: url('../images/site/checkerboard.jpg');
