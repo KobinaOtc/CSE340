@@ -11,6 +11,7 @@
 #top-header {
   display: flex;
   justify-content: space-between;
+  padding: 5px;
 }
 
 .siteName {
@@ -24,44 +25,188 @@
 
 /* Navigation styles start */
 nav {
-  background-color: #2b2b3a; /* Dark gray/black background for the nav bar */
+  background-color: #2b2b3a;
   padding: 0;
 }
 
 nav ul {
-  list-style: none; /* Remove bullet points */
-  display: flex; /* Arrange list items horizontally */
-  justify-content: space-around; /* Start items from the left */
-  margin: 0; /* Remove default margin */
+  list-style: none;
+  display: flex; 
+  justify-content: space-around;
+  margin: 0;
 }
 
 nav ul li {
-  padding: 15px 20px; /* Spacing inside each menu item */
+  padding: 15px 20px;
 }
 
 nav ul li a {
-  text-decoration: none; /* Remove underline from links (assuming they will be links) */
-  color: #fff; /* White text color */
+  text-decoration: none;
+  color: #fff;
   font-weight: 500;
   font-size: 1em;
 }
 
-/* Style for text inside the list item, assuming the li contains the text */
+
 nav ul li {
-    color: #fff; /* Apply white text color to the list text */
+  color: #fff;
 }
+
+/* CAR SECTION START */
+h1 {
+  margin-top: 20px;
+  padding: 5px;
+}
+
+.car-section {
+  display: flex;
+  position: relative;
+  height: 400px;
+  background-image: url('../images/vehicles/delorean.jpg');
+  background-repeat: no-repeat;
+  background-position: 100% 50%;
+  background-size: contain;
+  padding: 2em;
+}
+
+.car-section aside {
+  position: absolute;
+  top: 15%;
+  left: 5%;
+  padding: 30px;
+  background-color: #ffffffca;
+  border-radius: 8px;
+}
+
+.car-section h3 {
+  color: #00bfff; 
+  font-size: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.car-section p {
+  color: #00bfff;
+  margin: 0.25em 0;
+}
+
+.car-section button {
+  background-color: #00bfff;
+  color: #000;
+  padding: 10px 20px;
+  border: none;
+  font-size: 1.1em;
+  cursor: pointer;
+  margin-top: 1em;
+}
+
+/* CAR ADDONS SECTION START */
+
+.car-addons {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 20px;
+  margin-top: 2em;
+  padding: 0 2em;
+}
+
+.car-addons h2 {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 1em;
+}
+
+/* Upgrades Column Styles */
+.upgrades-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two items per row in the grid */
+  gap: 10px; /* Space between the upgrade items */
+}
+
+.upgrades-grid > div {
+  text-align: center;
+}
+
+/* Image container styling */
+.upgrades-grid > div > div {
+  background-color: #00bfff; /* Bright blue background for the image containers */
+  padding: 10px;
+  border-radius: 5px;
+  height: 100px; /* Standard height to fit the items as shown in the screenshot */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Ensure images fit nicely inside the blue box */
+.upgrades-grid img {
+  max-width: 80%;
+  max-height: 80px; 
+  height: auto;
+}
+
+.upgrades-grid a {
+  display: block;
+  color: #00bfff; /* Bright blue link text */
+  text-decoration: underline;
+  margin-top: 0.5em;
+  font-size: 0.9em;
+}
+
+/* Reviews Column Styles */
+.reviews-column ul {
+  list-style-type: none;
+}
+
+.reviews-column li {
+  margin-bottom: 1em;
+  padding-left: 1em;
+  position: relative;
+}
+
+/* Create the bullet point using a pseudo-element for style control */
+.reviews-column li::before {
+  content: "•";
+  color: #000;
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+}
+
+.reviews-column li p {
+  display: inline;
+  margin: 0;
+  font-weight: bold;
+}
+
+footer {
+  padding: 30px;
+}
+
+
 
 @media (min-width: 768px) {
   body {
     background-image: url('../images/site/checkerboard.jpg');
+    background-repeat: repeat;
+    background-size: 30em;
   }
   #wrapper {
     max-width: 75vw;
-    margin: 0 auto;
-    margin-top: 50px;
+    margin: 50px auto;
     padding: 2em;
     background-color: #fffbf7;
     border: 3px solid aqua;
     border-radius: 12px;
+  }
+
+  .car-addons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Footer styles start */
+  footer {
+    padding: 30px 30px 0 30px;
   }
 }
