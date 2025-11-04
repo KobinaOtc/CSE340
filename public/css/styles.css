@@ -1,3 +1,11 @@
+:root {
+  font-family: "Average", serif, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  --primary-color: #00bfff;
+  --second-color: #2b2b3a;
+  --accent-text-color: #fffbf7;
+}
 /******* Change Box Model ***************/
 *,
 *:before,
@@ -20,12 +28,12 @@
 }
 .siteName a, #tools a {
   text-decoration: none;
-  color: black;
+  color: var(--second-color);
 }
 
 /* Navigation styles start */
 nav {
-  background-color: #2b2b3a;
+  background-color: var(--second-color);
   padding: 0;
 }
 
@@ -42,14 +50,14 @@ nav ul li {
 
 nav ul li a {
   text-decoration: none;
-  color: #fff;
+  color: var(--accent-text-color);
   font-weight: 500;
   font-size: 1em;
 }
 
 
 nav ul li {
-  color: #fff;
+  color: var(--accent-text-color);
 }
 
 /* CAR SECTION START */
@@ -79,19 +87,19 @@ h1 {
 }
 
 .car-section h3 {
-  color: #00bfff; 
+  color: var(--primary-color); 
   font-size: 1.5em;
   margin-bottom: 0.5em;
 }
 
 .car-section p {
-  color: #00bfff;
+  color: var(--primary-color);
   margin: 0.25em 0;
 }
 
 .car-section button {
-  background-color: #00bfff;
-  color: #000;
+  background-color: var(--primary-color);
+  color: var(--second-color);
   padding: 10px 20px;
   border: none;
   font-size: 1.1em;
@@ -128,7 +136,7 @@ h1 {
 
 /* Image container styling */
 .upgrades-grid > div > div {
-  background-color: #00bfff; /* Bright blue background for the image containers */
+  background-color: var(--primary-color); /* Bright blue background for the image containers */
   padding: 10px;
   border-radius: 5px;
   height: 100px; /* Standard height to fit the items as shown in the screenshot */
@@ -146,7 +154,7 @@ h1 {
 
 .upgrades-grid a {
   display: block;
-  color: #00bfff; /* Bright blue link text */
+  color: var(--primary-color); /* Bright blue link text */
   text-decoration: underline;
   margin-top: 0.5em;
   font-size: 0.9em;
@@ -166,7 +174,7 @@ h1 {
 /* Create the bullet point using a pseudo-element for style control */
 .reviews-column li::before {
   content: "•";
-  color: #000;
+  color: var(--second-color);
   font-weight: bold;
   display: inline-block;
   width: 1em;
@@ -195,8 +203,8 @@ footer {
     max-width: 75vw;
     margin: 50px auto;
     padding: 2em;
-    background-color: #fffbf7;
-    border: 3px solid aqua;
+    background-color: var(--accent-text-color);
+    border: 3px solid var(--primary-color);
     border-radius: 12px;
   }
 
