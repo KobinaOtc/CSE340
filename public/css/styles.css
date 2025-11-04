@@ -3,4 +3,36 @@
 *:before,
 *:after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Header styles start*/
+#top-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.siteName {
+  font-size: 2em;
+  font-weight: 600;
+}
+.siteName a, #tools a {
+  text-decoration: none;
+  color: black;
+}
+
+@media (min-width: 768px) {
+  body {
+    background-image: url('../images/site/checkerboard.jpg');
+  }
+  #wrapper {
+    max-width: 75vw;
+    margin: 0 auto;
+    margin-top: 50px;
+    padding: 2em;
+    background-color: #fffbf7;
+    border: 3px solid aqua;
+    border-radius: 12px;
+  }
 }
