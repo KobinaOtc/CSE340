@@ -16,7 +16,7 @@
             "name": "render.com",
             "database": "cse340_0vtp",
             "username": "cse340",
-            "connectString": "postgresql://cse340:59SnLA6SaAy3Teq76d95uSszrHjssSLJ@dpg-d44f30s9c44c73bkgfo0-a.frankfurt-postgres.render.com/cse340_0vtp"
+            "connectString": "postgresql://cse340n2:Zbqxswsbu4H0hjsFO4Qs4ITuzu2w5DMV@dpg-d48fn1jipnbc73dfk070-a.frankfurt-postgres.render.com/cse340n2"
         }
     ]
 }
