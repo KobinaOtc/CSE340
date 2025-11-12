@@ -10,7 +10,7 @@ async function getClassifications() {
 /* ***************************
  *  Get all inventory items and classification_name by classification_id
  * ************************** */
-async function getInventoryByClassificationsId(classification_id) {
+async function getInventoryByClassificationId(classification_id) {
   try {
     const data = await pool.query(
       `SELECT * FROM public.inventory AS i 
@@ -25,4 +25,4 @@ async function getInventoryByClassificationsId(classification_id) {
   }
 }
 
-module.exports = {getClassifications, getInventoryByClassificationsId}
+module.exports = {getClassifications, getInventoryByClassificationId}
