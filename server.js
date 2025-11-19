@@ -14,7 +14,6 @@ const utilities = require("./utilities/");
 const inventoryRoute = require('./routes/inventoryRoute');
 const vehicleRoute = require('./routes/vehicleRoute');
 const baseController = require('./controllers/baseController');
-const vecController = require('./controllers/vehicleController');
 const expressLayouts = require('express-ejs-layouts');
 
 
