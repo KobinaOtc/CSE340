@@ -12,4 +12,12 @@ baseController.buildHome = async function(req, res) {
     })
 }
 
+/* ***************************
+ * Intentional 500 Error Generator
+ * ************************** */
+baseController.throwError = async function(req, res, next) {
+    // This intentionally throws an error to test the error handler middleware
+    throw new Error("Intentional 500 Error: You broke the server!")
+}
+
 module.exports = baseController

@@ -9,6 +9,10 @@ vecCont.buildByInvId = async function (req, res, next) {
     const data = await vecModel.getVehicleById(inventory_id)
     // Set up the grid and navs from the utils
 
+    if (!data) {
+        return next({status: 404, message: 'Sorry, no vehicle information found for that ID.'})
+    }
+
     const vecMake = `${data.inv_year} ${data.inv_make}`
     let nav = await utilities.getNav()
     let card = await utilities.buildVehicleCard(data)

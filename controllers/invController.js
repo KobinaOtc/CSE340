@@ -21,4 +21,12 @@ invCont.buildByClassificationId = async function (req, res, next) {
   })
 }
 
+/* ***************************
+ * Intentional 500 Error Generator
+ * ************************** */
+invCont.throwError = async function(req, res, next) {
+    // This intentionally throws an error to test the error handler middleware
+    throw new Error("Intentional 500 Error: You broke the server!")
+}
+
 module.exports = invCont
