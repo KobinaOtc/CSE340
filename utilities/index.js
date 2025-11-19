@@ -6,7 +6,6 @@ const Util = {}
  ************************** */
 Util.getNav = async function(req, res, next) {
     let data = await invModel.getClassifications()
-    console.log(data)
     let list = '<ul>'
     list += '<li><a href="/" title="Home page">Home</a></li>'
     data.rows.forEach((row) => {
@@ -56,6 +55,36 @@ Util.buildClassificationGrid = async function(data){
     grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
   }
   return grid
+}
+
+Util.buildVehicleCard = async function (data) {
+    console.log(data)
+    return `
+    <div class="card-view">
+        <div>
+            <img src="${data.inv_image}" alt="${data.inv_make} ${data.inv_model}">
+        </div>
+        <div>
+            <div class="text-container">
+                <div>
+                    <p>${data.inv_make}</p>
+                </div>
+                <div>
+                    <p>Price: <strong>$${data.inv_price}.00</strong></p>
+                </div>
+                <div>
+                    <p>Description: ${data.inv_description}</p>
+                </div>
+                <div>
+                    <p>Color: ${data.inv_color}</p>
+                </div>
+                <div>
+                    <p>Miles: ${data.inv_miles}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    `
 }
 
 /* ****************************************
