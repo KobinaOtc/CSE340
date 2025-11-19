@@ -39,7 +39,6 @@ Util.buildClassificationGrid = async function(data){
       +'" alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model 
       +' on CSE Motors" /></a>'
       grid += '<div class="namePrice">'
-      grid += '<hr />'
       grid += '<h2>'
       grid += '<a href="../../inv/detail/' + vehicle.inv_id +'" title="View ' 
       + vehicle.inv_make + ' ' + vehicle.inv_model + ' details">' 
@@ -60,26 +59,26 @@ Util.buildClassificationGrid = async function(data){
 Util.buildVehicleCard = async function (data) {
     console.log(data)
     return `
-    <div class="card-view">
-        <div>
+    <div class="card-view-detail">
+        <div class="image-column">
             <img src="${data.inv_image}" alt="${data.inv_make} ${data.inv_model}">
         </div>
-        <div>
+        <div class = "info-column">
             <div class="text-container">
-                <div>
+                <div class="detail-title">
                     <p>${data.inv_make}</p>
                 </div>
-                <div>
-                    <p>Price: <strong>$${data.inv_price}.00</strong></p>
+                <div class="price-row">
+                    <p>Price: <strong class="price-value">$${new Intl.NumberFormat('en-US').format(data.inv_price)}.00</strong></p>
                 </div>
-                <div>
+                <div class="description-row">
                     <p>Description: ${data.inv_description}</p>
                 </div>
-                <div>
+                <div class="detail-row">
                     <p>Color: ${data.inv_color}</p>
                 </div>
-                <div>
-                    <p>Miles: ${data.inv_miles}</p>
+                <div class="detail-row">
+                    <p><span class="detail-row">Miles:</span> ${new Intl.NumberFormat('en-US').format(data.inv_miles)}</p>
                 </div>
             </div>
         </div>

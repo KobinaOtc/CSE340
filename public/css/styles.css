@@ -55,6 +55,10 @@ nav ul li a {
   font-size: 1em;
 }
 
+#wrapper {
+  width: 100vw;
+}
+
 
 nav ul li {
   color: var(--accent-text-color);
@@ -187,6 +191,152 @@ h1 {
   font-weight: bold;
 }
 
+#inv-display {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr); /* Default to 1 column on mobile */
+  gap: 1rem;
+  list-style-type: none;
+  margin: 0;
+  padding: 0 1rem;
+}
+
+#inv-display li {
+  display: flex;
+  flex-direction: column;
+  background-color: white; /* Match the screenshot style */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden; /* Ensures borders look clean around images */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#inv-display a {
+  text-decoration: none;
+  color: var(--primary-color); /* Blue for links */
+}
+
+#inv-display img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-bottom: 1px solid #ccc;
+}
+
+.namePrice {
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.namePrice hr {
+  display: none; /* Removed the horizontal rule from the screenshot view */
+}
+
+.namePrice h2 {
+  font-size: 1.1rem;
+  margin: 0 0 0.25rem 0;
+}
+
+.namePrice h2 a {
+  color: var(--second-color); /* Darker text for the name/model */
+  font-weight: 500;
+}
+
+.namePrice span {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+
+/* vehicle details page styles */
+.card-view-detail {
+  display: flex;
+  flex-direction: column; /* Stacked on mobile */
+  gap: 1.5rem;
+  padding: 1rem;
+  margin-top: 1.5rem;
+}
+
+.image-column img {
+  width: 100%;
+  max-width: 400px; /* Constrain image size on mobile */
+  height: auto;
+  display: block;
+  border-radius: 5px;
+}
+
+.info-column {
+  /* Styles for the right hand column content */
+  padding: 1rem 0;
+}
+
+.info-column .detail-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  color: var(--second-color);
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.5rem;
+}
+
+.text-container > div {
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.75rem;
+}
+
+.text-container p {
+  margin: 0;
+  line-height: 1.4;
+  font-size: 1.1rem;
+}
+
+/* Price specific styling (matches screenshot appearance) */
+.price-row {
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+.price-row p {
+  display: inline-block;
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+}
+.price-row .price-label {
+  /* Hiding the 'Price:' label text */
+  display: none; 
+}
+.price-row .price-value {
+  font-weight: bold;
+  font-size: 1.6rem; /* Ensure large font for value */
+}
+
+/* Description specific styling */
+.description-row {
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+.description-row .desc-label {
+  font-weight: bold;
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+
+/* General detail rows (Color, Miles) */
+.detail-row {
+  font-size: 1.1rem;
+}
+.detail-row p {
+  display: inline-block;
+  margin: 0;
+}
+.detail-row .detail-label {
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+
 footer {
   padding: 30px;
 }
@@ -211,6 +361,31 @@ footer {
   .car-addons {
     display: grid;
     grid-template-columns: 1fr 1fr;
+  }
+
+  /* Classification grid for desktop */
+  #inv-display {
+    grid-template-columns: repeat(3, 1fr); /* 3 columns on desktop */
+    padding: 0;
+  }
+
+  /* vehicle details page on desktop */
+  .card-view-detail {
+    flex-direction: row; /* Side-by-side */
+    gap: 2.5rem;
+    align-items: flex-start;
+  }
+  
+  .image-column {
+    flex: 1 1 50%;
+  }
+  .info-column {
+    flex: 1 1 50%;
+    padding-top: 0;
+  }
+
+  .image-column img {
+    max-width: 100%;
   }
 
   /* Footer styles start */
