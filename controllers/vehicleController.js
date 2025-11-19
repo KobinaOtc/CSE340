@@ -11,6 +11,7 @@ vecCont.buildByInvId = async function (req, res, next) {
     const className = data[0].inv_make
     res.render('./inventory/vehicle', {
         title: className,
+        card: `This page belongs to: ${className}`
         // details of the page
     })
 }

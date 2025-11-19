@@ -12,7 +12,9 @@ const app = express();
 const static = require("./routes/static");
 const utilities = require("./utilities/");
 const inventoryRoute = require('./routes/inventoryRoute');
+const vehicleRoute = require('./routes/vehicleRoute');
 const baseController = require('./controllers/baseController');
+const vecController = require('./controllers/vehicleController');
 const expressLayouts = require('express-ejs-layouts');
 
 
@@ -30,7 +32,8 @@ app.use(static);
 // Index route
 app.get('/', utilities.handleErrors(baseController.buildHome));
 // Inventory routes
-app.use("/inv", inventoryRoute);
+app.use('/inv', inventoryRoute);
+app.use('/inv/detail', vehicleRoute);
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
   next({status: 404, message: 'Sorry, we appear to have lost that page.'})
