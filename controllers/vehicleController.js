@@ -9,13 +9,14 @@ vecCont.buildByInvId = async function (req, res, next) {
     const data = await vecModel.getVehicleById(inventory_id)
     // Set up the grid and navs from the utils
 
-    const className = data.inv_make
+    const vecMake = `${data.inv_year} ${data.inv_make}`
     let nav = await utilities.getNav()
+    let card = await utilities.buildVehicleCard(data)
     res.render('./vehicle/vehicle', {
-        title: className,
+        title: vecMake,
         nav,
-        card: `This page belongs to: ${className}`
         // details of the page
+        card,
     })
 }
 
