@@ -9,6 +9,8 @@
 const express = require("express");
 const env = require("dotenv").config();
 const app = express();
+const session = require("express-session")
+const pool = require('./database/')
 const static = require("./routes/static");
 const utilities = require("./utilities/");
 const inventoryRoute = require('./routes/inventoryRoute');
@@ -37,6 +39,20 @@ app.use('/inv/detail', vehicleRoute);
 app.use(async (req, res, next) => {
   next({status: 404, message: 'Sorry, we appear to have lost that page.'})
 })
+
+/* ***********************
+ * Middleware
+ * ************************/
+ app.use(session({
+  store: new (require('connect-pg-simple')(session))({
+    createTableIfMissing: true,
+    pool,
+  }),
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: true,
+  name: 'sessionId',
+}))
 
 
 /* ***********************
