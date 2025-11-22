@@ -57,7 +57,7 @@ Util.buildClassificationGrid = async function(data){
 }
 
 Util.buildVehicleCard = async function (data) {
-    console.log(data)
+    // console.log(data)
     return `
     <div class="card-view-detail">
         <div class="image-column">
