@@ -9,8 +9,9 @@
 const express = require("express");
 const env = require("dotenv").config();
 const app = express();
-const session = require("express-session")
-const pool = require('./database/')
+const session = require("express-session");
+const bodyParser = require("body-parser");
+const pool = require('./database/');
 const static = require("./routes/static");
 const utilities = require("./utilities/");
 const inventoryRoute = require('./routes/inventoryRoute');
@@ -30,7 +31,7 @@ app.set('layout', './layouts/layout')
 /* ***********************
  * Middleware
  * ************************/
- app.use(session({
+app.use(session({
   store: new (require('connect-pg-simple')(session))({
     createTableIfMissing: true,
     pool,
@@ -40,6 +41,11 @@ app.set('layout', './layouts/layout')
   saveUninitialized: true,
   name: 'sessionId',
 }))
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({
+  extended: true
+})) // for parsing application/x-www-form-urlencoded
+
 
 // Express Messages Middleware
 app.use(require('connect-flash')())

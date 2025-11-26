@@ -10,6 +10,7 @@ baseController.buildHome = async function(req, res) {
         nav,
         content: renderContent(),
         reviews: renderReviews(),
+        errors: null,
     })
 }
 
