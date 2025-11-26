@@ -21,6 +21,7 @@ vecCont.buildByInvId = async function (req, res, next) {
         nav,
         // details of the page
         card,
+        errors: null,
     })
 }
 
