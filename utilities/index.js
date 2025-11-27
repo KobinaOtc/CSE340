@@ -86,6 +86,25 @@ Util.buildVehicleCard = async function (data) {
     `
 }
 
+Util.buildClassList = async function (classification_id = null) {
+    let data = await invModel.getClassifications()
+    let classList = '<select name="classification_id" id="classificationList" required>'
+    classList += '<option value="">Choose a Classification</option>'
+
+    data.rows.forEach((row) => {
+        classList += '<option value="' + row.classification_id + '"'
+        if (
+            classification_id != null 
+            && row.classification_id == classification_id
+        ) {
+            classList + ' selected '
+        }
+        classList += '>' + row.classification_name + '</option>'
+    })
+    classList += '</select>'
+    return classList
+}
+
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 

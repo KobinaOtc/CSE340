@@ -1,0 +1,35 @@
+<% if (title) { %>
+<!-- Page heading provided by the controller -->
+<h1><%= title %></h1>
+<% } else { /* If no title was provided, redirect back to the home page. This
+keeps the view from rendering when required context isn't available. */
+res.redirect('/') } %> <%- messages() %> <% if (errors) { %>
+<ul class="notice">
+  <% errors.array().forEach(error => { %>
+  <li><%= error.msg %></li>
+  <% }) %>
+</ul>
+<% } %>
+
+<div>
+  <ul class="inventory-management-links">
+    <li>
+      <a href="/inv/new-classification">Add New Classification</a>
+    </li>
+    <li>
+      <a href="/inv/new-vehicle">Add new Vehicle</a>
+    </li>
+  </ul>
+</div>
+
+  <h2>Manage Inventory</h2>
+
+  <p>Choose a classification to see those inventory items.</p>
+  <div><%- selectClass %></div>
+
+  <table id="inventoryDisplay"></table>
+
+
+<noscript>JavaScript must be enabled to use this page.</noscript>
+
+<!-- <script src="../../js/inventory.js"></script> -->

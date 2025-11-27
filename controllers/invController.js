@@ -23,6 +23,32 @@ invCont.buildByClassificationId = async function (req, res, next) {
 }
 
 /* ***************************
+ *  Build Vehicle management view
+ * ************************** */
+invCont.buildManagementView = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  const selectClass = await utilities.buildClassList()
+  res.render("./inventory/vehicle-management", {
+    title: "Vehicle Management",
+    nav,
+    selectClass,
+    errors: null,
+  })
+}
+
+/* ***************************
+ *  Build New Classification View
+ * ************************** */
+invCont.buildNewClassificationView = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("./inventory/new-classification", {
+    title: "Add New Classification",
+    nav,
+    errors: null,
+  })
+}
+
+/* ***************************
  * Intentional 500 Error Generator
  * ************************** */
 invCont.throwError = async function(req, res, next) {
