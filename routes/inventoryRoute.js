@@ -9,4 +9,10 @@ router.get("/type/:classificationId", utilities.handleErrors(invController.build
 
 // Error route
 router.get("/trigger-error", utilities.handleErrors(invController.throwError));
+
+// Inventory management page route
+router.get("/", utilities.handleErrors(invController.buildManagementView));
+
+// New vehicle page route
+router.get("/new-classification", utilities.handleErrors(invController.buildNewClassificationView))
 module.exports = router;

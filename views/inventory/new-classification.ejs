@@ -1,0 +1,33 @@
+<% if (title) { %>
+<!-- Page heading provided by the controller -->
+<h1><%= title %></h1>
+<% } else { /* If no title was provided, redirect back to the home page. This
+keeps the view from rendering when required context isn't available. */
+res.redirect('/') } %> <%- messages() %> <% if (errors) { %>
+<ul class="notice">
+  <% errors.array().forEach(error => { %>
+  <li><%= error.msg %></li>
+  <% }) %>
+</ul>
+<% } %>
+
+<div class="formContainer">
+  <div>
+    <p>All fields are required.</p>
+    <p>Name must be alphabetic characters only.</p>
+  </div>
+  <form class="authForm" action="/inv/new-classification" method="post">
+    <div>
+      <label for="classification_name">Classification Name:</label>
+      <input
+        type="text"
+        id="classification_name"
+        name="classification_name"
+        required
+        pattern="^[a-zA-Z0-9]+$"
+        title="Classification name must contain only letters and numbers, no spaces or special characters"
+        value="<%= locals.classification_name %>" >
+    </div>
+    <button type="submit">Add Classification</button>
+  </form>
+</div>
