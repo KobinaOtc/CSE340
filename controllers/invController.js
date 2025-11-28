@@ -83,6 +83,46 @@ invCont.newClass = async function (req, res, next) {
   }
 }
 
+invCont.newVehicle = async function (req, res, next) {
+  const {
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_miles,
+    inv_color,
+    classification_id,
+  } = req.body;
+  const regResult = await invModel.registerVehicle(
+    inv_make,
+    inv_model,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_year,
+    inv_miles,
+    inv_color,
+    classification_id
+  );
+  if (regResult) {
+    req.flash("success", `New vehicle added successfully.`);
+    res.redirect("/inv");
+  } else {
+    const classificationSelect = await utilities.buildClassificationList();
+    let nav = await utilities.getNav();
+    res.render("./inventory/new-vehicle", {
+      title: "Add New Vehicle",
+      nav,
+      classificationSelect,
+      errors: "Failed to add new vehicle. Please try again.",
+    });
+  }
+}
+
 /* ***************************
  * Intentional 500 Error Generator
  * ************************** */

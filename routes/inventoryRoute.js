@@ -28,4 +28,12 @@ router.post(
 // New Vehicle page route
 router.get("/new-vehicle", utilities.handleErrors(invController.buildNewVehicleView))
 
+// New Vehicle post route
+router.post(
+    "/new-vehicle",
+    invVal.newClassificationRules(),
+    invVal.checkNewVehicleData,
+    utilities.handleErrors(invController.newVehicle)
+)
+
 module.exports = router;
