@@ -49,6 +49,81 @@ invCont.buildNewClassificationView = async function (req, res, next) {
 }
 
 /* ***************************
+ *  Build New Vehicle View
+ * ************************** */
+invCont.buildNewVehicleView = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  const selectClass = await utilities.buildClassList()
+  res.render("./inventory/new-vehicle", {
+    title: "Add New Vehicle",
+    nav,
+    selectClass,
+    errors: null,
+  })
+}
+
+/* ***************************
+ *  Process New Classification data
+ * ************************** */
+invCont.newClass = async function (req, res, next) {
+  const { classification_name } = req.body;
+  const regResult = await invModel.registerClassification(
+    classification_name
+  );
+  if (regResult) {
+    req.flash("success", `New classification added successfully.`);
+    res.redirect("/inv");
+  } else {
+    let nav = await utilities.getNav();
+    res.render("./inventory/new-classification", {
+      title: "Add New Classification",
+      nav,
+      errors: "Failed to add new classification. Please try again.",
+    });
+  }
+}
+
+invCont.newVehicle = async function (req, res, next) {
+  const {
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_miles,
+    inv_color,
+    classification_id,
+  } = req.body;
+  const regResult = await invModel.registerVehicle(
+    inv_make,
+    inv_model,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_year,
+    inv_miles,
+    inv_color,
+    classification_id
+  );
+  if (regResult) {
+    req.flash("success", `New vehicle added successfully.`);
+    res.redirect("/inv");
+  } else {
+    const classificationSelect = await utilities.buildClassificationList();
+    let nav = await utilities.getNav();
+    res.render("./inventory/new-vehicle", {
+      title: "Add New Vehicle",
+      nav,
+      classificationSelect,
+      errors: "Failed to add new vehicle. Please try again.",
+    });
+  }
+}
+
+/* ***************************
  * Intentional 500 Error Generator
  * ************************** */
 invCont.throwError = async function(req, res, next) {
