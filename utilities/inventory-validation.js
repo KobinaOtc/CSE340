@@ -111,45 +111,43 @@ validate.checkNewClassificationData = async (req, res, next) => {
  * ***************************** */
 validate.checkNewVehicleData = async (req, res, next) => {
     const errors = validationResult(req)
-    if (!errors.isEmpty()) {
-        const {
-            inv_make,
-            inv_model,
-            inv_year,
-            inv_description,
-            inv_image,
-            inv_thumbnail,
-            inv_price,
-            inv_miles,
-            inv_color,
-            classification_id,
-        } = req.body;
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            let nav = await utilities.getNav();
-            const selectClass = await utilities.buildClassList(
-            classification_id
-            );
-            res.render("inventory/new-vehicle", {
-            errors,
-            title: "Add New Vehicle",
-            nav,
-            selectClass,
-            inv_make,
-            inv_model,
-            inv_year,
-            inv_description,
-            inv_image,
-            inv_thumbnail,
-            inv_price,
-            inv_miles,
-            inv_color,
-            classification_id,
-            });
-            return;
-        }
-        next();
+    if (errors.isEmpty()) {
+        return next();
     }
+
+    const {
+        inv_make,
+        inv_model,
+        inv_year,
+        inv_description,
+        inv_image,
+        inv_thumbnail,
+        inv_price,
+        inv_miles,
+        inv_color,
+        classification_id,
+    } = req.body;
+    let nav = await utilities.getNav();
+    // Use the submitted classification_id to re-select the correct option
+    const selectClass = await utilities.buildClassList(classification_id);
+
+    res.render("inventory/new-vehicle", {
+        errors,
+        title: "Add New Vehicle",
+        nav,
+        selectClass,
+        inv_make,
+        inv_model,
+        inv_year,
+        inv_description,
+        inv_image,
+        inv_thumbnail,
+        inv_price,
+        inv_miles,
+        inv_color,
+        // All submitted values are passed back to keep fields filled
+    });
+    return;
 }
 
 module.exports = validate
