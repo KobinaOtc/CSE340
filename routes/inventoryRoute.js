@@ -31,7 +31,7 @@ router.get("/new-vehicle", utilities.handleErrors(invController.buildNewVehicleV
 // New Vehicle post route
 router.post(
     "/new-vehicle",
-    invVal.newClassificationRules(),
+    invVal.newVehicleRules(),
     invVal.checkNewVehicleData,
     utilities.handleErrors(invController.newVehicle)
 )
