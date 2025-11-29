@@ -24,7 +24,7 @@ validate.newClassificationRules = () => {
 /* ******************************
  * New Vehicle Data Validation Rules
  * ***************************** */
-validate.newVehiicleRules = () => {
+validate.newVehicleRules = () => {
     return [
         // inv_make is a required string
         body("inv_make")
