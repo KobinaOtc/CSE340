@@ -83,6 +83,9 @@ invCont.newClass = async function (req, res, next) {
   }
 }
 
+/* ***************************
+ *  Process New Vehicle data
+ * ************************** */
 invCont.newVehicle = async function (req, res, next) {
   const {
     inv_make,
@@ -96,6 +99,7 @@ invCont.newVehicle = async function (req, res, next) {
     inv_color,
     classification_id,
   } = req.body;
+  
   const regResult = await invModel.registerVehicle(
     inv_make,
     inv_model,
@@ -108,17 +112,29 @@ invCont.newVehicle = async function (req, res, next) {
     inv_color,
     classification_id
   );
-  if (regResult) {
-    req.flash("success", `New vehicle added successfully.`);
+  
+  if (regResult) { 
+    req.flash("notice", `New vehicle added successfully.`);
     res.redirect("/inv");
-  } else {
-    const classificationSelect = await utilities.buildClassificationList();
+  } else { 
+    const selectClass = await utilities.buildClassList(classification_id); 
     let nav = await utilities.getNav();
+    
     res.render("./inventory/new-vehicle", {
       title: "Add New Vehicle",
       nav,
-      classificationSelect,
-      errors: "Failed to add new vehicle. Please try again.",
+      selectClass,
+      errors: "Failed to add new vehicle. Please try again. Check your database constraints for detailed errors.",
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_miles,
+      inv_color,
+      classification_id,
     });
   }
 }

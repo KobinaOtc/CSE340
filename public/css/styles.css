@@ -343,6 +343,171 @@ h1 {
   margin-right: 0.5rem;
 }
 
+/* form styles */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; 
+  max-width: 400px; 
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f7f7f7;
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+}
+
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 1em;
+}
+
+/* Style for the button (Login or Register) */
+input[type="submit"] {
+  background-color: #00bfff;
+  color: #fff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1.1em;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+  background-color: #0099cc;
+}
+
+/* Link/text below the form */
+#register-link {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 0.9em;
+}
+
+#register-link a {
+  color: #00bfff;
+  text-decoration: none;
+}
+
+/* --- VALID/INVALID INPUT STYLES START --- */
+
+input:required:invalid {
+  /* Styles for required inputs that are invalid (not matching pattern/min length) */
+  /* Add the following two lines to your existing invalid style block: */
+  
+  /* The core issue: browsers mark required but empty fields as invalid. */
+  /* We apply the red styling ONLY if the field is not empty, OR if we force validation via class */
+  
+  /* Forcing the red border only AFTER interaction is difficult without JS. 
+  * The solution below ensures red appears when content is typed but invalid. 
+  * To hide the red *before typing* we rely on the browser's internal logic which is 
+  * often overridden by CSS.
+  * Let's change the invalid rule to only apply IF the input is NOT empty:
+  */
+  
+  /* 🚨 This is the key change to prevent early red highlighting: */
+  &:not(:placeholder-shown):invalid { 
+    border: 2px solid #ff0000;
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+  }
+}
+
+/* Original Invalid Styles - Keep these, but rely on the browser to apply them only when needed */
+input:required:invalid {
+  border: 2px solid #ff0000; /* Red border for invalid */
+}
+
+/* We will use a more specific selector to delay the red glow: */
+input:not(:focus):required:invalid {
+/* Only show red border if the field has been touched/submitted but is invalid */
+box-shadow: none;
+}
+
+/* New CSS to add/modify: */
+input:required:invalid:not(:focus) {
+  /* Hides the default error focus/border until the form is interacted with */
+  /* Many users add a class like .touched or .dirty via JS for a perfect solution. 
+  * However, in pure CSS, we rely on preventing the visual cue when empty.
+  */
+}
+
+/* Add the 'touched' class concept to CSS for demonstration/future JS integration */
+/* Assuming your inputs eventually get a .dirty or .touched class after the first interaction */
+/* You should keep your simple selectors but apply a helper class (if you use JavaScript later) */
+
+/* The MOST EFFECTIVE PURE CSS FIX is setting initial shadow/border to normal
+  and only letting the browser styles take effect once a value is entered. */
+
+/* Let's adjust the selectors: */
+/* Ensure the styling only applies when the input has content AND is invalid. */
+input:required:invalid:not(:empty) { 
+  border: 2px solid red;
+  box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+}
+
+/* If the form is submitted and validation fails, the input is marked invalid */
+/* We rely on the browser not applying the invalid state until content is typed or form submission occurs. */
+
+/* *** Final Recommended Fix for your existing CSS structure *** */
+
+/* Modify the invalid rule to specifically exclude the initial empty state.
+  The browser often struggles with this selector. We'll use the :placeholder-shown trick, 
+  but since your inputs lack placeholders, we'll rely on the fact that modern browsers 
+  often hide the default invalid look until form submission or keypress. */
+
+/* Ensure the initial state is clean: */
+input {
+  border: 1px solid #ccc !important; 
+  box-shadow: none !important;
+}
+
+/* Re-apply valid/invalid with higher specificity and an important distinction: */
+
+/* For inputs that are required, don't show the red border UNLESS the input has content and is invalid. */
+input:required:invalid {
+  /* Initially hide the visual cue for empty required fields */
+  box-shadow: none !important;
+  border: 1px solid #ccc !important; 
+}
+
+/* Show red border/shadow when input is typed but invalid (requires content to be present) */
+input:required:invalid:not(:placeholder-shown) {
+  border: 2px solid #ff0000 !important; /* Red border for invalid */
+  box-shadow: 0 0 5px rgba(255, 0, 0, 0.5) !important; /* Red glow for focus/invalid */
+}
+
+/* Styles for valid input (green border) */
+input:required:valid {
+  border: 2px solid #00aa00 !important; /* Green border for valid */
+  box-shadow: none !important;
+}
+
+/* Green shadow on focus for valid inputs */
+input:required:valid:focus {
+  box-shadow: 0 0 5px rgba(0, 170, 0, 0.5) !important; 
+}
+
+/* --- VALID/INVALID INPUT STYLES END --- */
+
 footer {
   padding: 30px;
 }

@@ -67,9 +67,14 @@ async function registerVehicle(
       inv_color,
       classification_id,
     ];
-    return await pool.query(sql, values);
+    
+    // FIX: Return the rowCount (1 for success)
+    const result = await pool.query(sql, values);
+    return result.rowCount; 
   } catch (error) {
-    return error.message;
+    console.error("registerVehicle error: " + error.message);
+    // FIX: Return a falsy value (0) on failure
+    return 0; 
   }
 }
 
