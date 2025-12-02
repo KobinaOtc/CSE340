@@ -9,6 +9,7 @@
                     type="email"
                     name="account_email"
                     required
+                    placeholder="Enter your email"
                     value="<%= locals.account_email %>"
                 />
             </div>
@@ -20,6 +21,7 @@
                     type="password"
                     required
                     pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
+                    placeholder="Enter your password"
                     title="Password must be at least 12 characters long and contain at least 1 uppercase letter, 1 number, and 1 special character."
                 />
             </div>
