@@ -443,29 +443,35 @@ input[type="submit"]:hover {
 
 /* --- VALID/INVALID INPUT STYLES START --- */
 
-input:required:invalid:not(:placeholder-shown) {
-  border: 2px solid #ff0000;
-  box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+input:required:invalid:not(:placeholder-shown),
+textarea:required:invalid:not(:placeholder-shown) {
+    border: 2px solid #ff0000 !important; /* Red border for invalid */
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.5) !important; /* Red glow */
 }
 
-input:focus:invalid:not(:placeholder-shown) {
-  border: 2px solid #ff0000;
-  box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+select:required:invalid {
+    border: 2px solid #ff0000 !important;
 }
 
-input:required:valid {
-  border: 2px solid #00aa00;
+input:focus:invalid,
+textarea:focus:invalid,
+select:focus:invalid {
+    border: 2px solid #ff0000 !important;
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.5) !important;
 }
 
-input:required:valid:focus {
-  box-shadow: 0 0 5px rgba(0, 170, 0, 0.5); 
+input:required:valid,
+textarea:required:valid,
+select:required:valid {
+    border: 2px solid #00aa00 !important; /* Green border for valid */
+    box-shadow: none !important;
 }
 
-input {
-  border: 1px solid #ccc;
-  box-shadow: none;
+input:required:valid:focus,
+textarea:required:valid:focus,
+select:required:valid:focus {
+    box-shadow: 0 0 5px rgba(0, 170, 0, 0.5) !important; 
 }
-
 /* --- VALID/INVALID INPUT STYLES END --- */
 
 footer {

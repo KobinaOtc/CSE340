@@ -26,6 +26,7 @@ res.redirect('/') } %> <%- messages() %> <% if (errors) { %>
         required
         pattern="^[a-zA-Z0-9]+$"
         title="Classification name must contain only letters and numbers, no spaces or special characters"
+        placeholder="Enter your classification name"
         value="<%= locals.classification_name %>" >
     </div>
     <button type="submit">Add Classification</button>

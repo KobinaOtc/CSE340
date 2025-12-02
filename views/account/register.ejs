@@ -21,6 +21,7 @@
                     type="text"
                     name="account_firstname"
                     required
+                    placeholder="Enter your first name"
                     value="<%= locals.account_firstname %>"
                 />
             </div>
@@ -31,6 +32,7 @@
                     type="text"
                     name="account_lastname"
                     required
+                    placeholder="Enter your last name"
                     value="<%= locals.account_lastname %>"
                 />
             </div>
@@ -41,6 +43,7 @@
                     type="email"
                     name="account_email"
                     required
+                    placeholder="Enter your email"
                     value="<%= locals.account_email %>"
                 />
             </div>
@@ -51,6 +54,7 @@
                     name="account_password"
                     type="password"
                     required
+                    placeholder="Enter your password"
                     pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
                     title="Password must be at least 12 characters long and contain at least 1 uppercase letter, 1 number, and 1 special character."
                 />
