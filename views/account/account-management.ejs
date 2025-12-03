@@ -1,0 +1,15 @@
+<% if (title) { %>
+<!-- Page heading provided by the controller -->
+<h1><%= title %></h1>
+<% } else { /* If no title was provided, redirect back to the home page. This
+keeps the view from rendering when required context isn't available. */
+res.redirect('/') } %> <%- messages() %> <% if (errors) { %>
+<ul class="notice">
+  <% errors.array().forEach(error => { %>
+  <li><%= error.msg %></li>
+  <% }) %>
+</ul>
+<% } %>
+
+<p>You're Logged in</p>
+

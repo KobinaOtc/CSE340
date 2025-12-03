@@ -36,4 +36,11 @@ router.post(
     utilities.handleErrors(invController.newVehicle)
 )
 
+// Get inventory JSON (protected)
+router.get(
+  "/getInventory/:classification_id",
+  utilities.checkAccountType,
+  utilities.handleErrors(invController.getInventoryJSON)
+);
+
 module.exports = router;
