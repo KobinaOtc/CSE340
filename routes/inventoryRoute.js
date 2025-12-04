@@ -46,4 +46,13 @@ router.get(
 // Route to build edit view by inventory ID
 router.get("/edit/:inv_id", utilities.handleErrors(invController.buildEditInventory))
 
+// Process inventory update
+router.post(
+  "/update",
+  utilities.checkAccountType,
+  invVal.updateVehicleRules(),
+  invVal.checkUpdateData,
+  utilities.handleErrors(invController.updateInventory)
+)
+
 module.exports = router;
