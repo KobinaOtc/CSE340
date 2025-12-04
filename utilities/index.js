@@ -120,11 +120,6 @@ Util.checkLogin = (req, res, next) => {
 };
 
 /* ****************************************
- * Middleware For Handling Errors
- * Wrap other function in this for 
- * General Error Handling
- **************************************** */
-/* ****************************************
 * Middleware to check token validity
 **************************************** */
 Util.checkJWTToken = (req, res, next) => {
@@ -146,6 +141,35 @@ Util.checkJWTToken = (req, res, next) => {
         next()
     }
 }
+
+/* ****************************************
+ * Middleware to check account type for inventory management
+ * Only allows Employee or Admin
+ **************************************** */
+
+Util.checkAccountType = (req, res, next) => {
+  if (res.locals.loggedin) {
+    const accountType = res.locals.accountData.account_type;
+    if (accountType === "Employee" || accountType === "Admin") {
+      next();
+    } else {
+      req.flash(
+        "notice",
+        "You do not have permission to access this resource."
+      );
+      return res.redirect("/account/login");
+    }
+  } else {
+    req.flash("notice", "Please log in with an authorized account.");
+    return res.redirect("/account/login");
+  }
+};
+
+/* ****************************************
+ * Middleware For Handling Errors
+ * Wrap other function in this for 
+ * General Error Handling
+ **************************************** */
 Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
 
 module.exports = Util
