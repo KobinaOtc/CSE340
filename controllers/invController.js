@@ -244,6 +244,47 @@ invCont.buildEditInventory = async function (req, res, next) {
 }
 
 /* ***************************
+ *  Build Delete Vehicle View
+ * ************************** */
+invCont.buildDeleteConfirmView = async function (req, res, next) {
+  const inventory_id = parseInt(req.params.inv_id);
+  let nav = await utilities.getNav();
+  const itemData = await invModel.getInventoryByInventoryId(inventory_id);
+  const itemName = `${itemData.inv_make} ${itemData.inv_model}`;
+  res.render("./inventory/delete-confirm", {
+    title: "Delete " + itemName,
+    nav,
+    errors: null,
+    inv_id: itemData.inv_id,
+    inv_make: itemData.inv_make,
+    inv_model: itemData.inv_model,
+    inv_year: itemData.inv_year,
+    inv_description: itemData.inv_description,
+    inv_image: itemData.inv_image,
+    inv_thumbnail: itemData.inv_thumbnail,
+    inv_price: itemData.inv_price,
+    inv_miles: itemData.inv_miles,
+    inv_color: itemData.inv_color,
+  })
+}
+
+/* ***************************
+ *  Process Vehicle Deletion
+ * ************************** */
+invCont.deleteInventory = async function (req, res, next) {
+  let nav = await utilities.getNav();
+  const { inv_id, inv_make, inv_model } = req.body;
+  const deleteResult = await invModel.deleteInventory(inv_id);
+  if (deleteResult) {
+    req.flash("notice", `The deletion was successful.`);
+    res.redirect("/inv/");
+  } else {
+    req.flash("notice", "Sorry, the delete failed.");
+    res.redirect("/inv/delete/" + inv_id);
+  }
+}
+
+/* ***************************
  * Intentional 500 Error Generator
  * ************************** */
 invCont.throwError = async function(req, res, next) {
