@@ -19,6 +19,7 @@ vecCont.buildByInvId = async function (req, res, next) {
     res.render('./vehicle/vehicle', {
         title: vecMake,
         nav,
+        inventory_id,
         // details of the page
         card,
         errors: null,

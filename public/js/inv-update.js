@@ -1,5 +1,5 @@
-const form = document.querySelector(".authForm");
+const form = document.querySelector(".authForm")
 form.addEventListener("change", function () {
-  const updateBtn = document.querySelector("button");
-  updateBtn.removeAttribute("disabled");
-});
+  const updateBtn = document.querySelector("button")
+  updateBtn.removeAttribute("disabled")
+})

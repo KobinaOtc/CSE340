@@ -19,6 +19,7 @@ classificationList.addEventListener("change", function () {
     }) 
     .catch(function (error) { 
         console.log('There was a problem: ', error.message) 
+        throw Error('Fetch of JSON data failed.')
     }) 
 })
 
