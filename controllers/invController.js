@@ -253,7 +253,7 @@ invCont.buildEditInventory = async function (req, res, next) {
 invCont.buildDeleteConfirmView = async function (req, res, next) {
   const inventory_id = parseInt(req.params.inv_id);
   let nav = await utilities.getNav();
-  const itemData = await invModel.getInventoryByInventoryId(inventory_id);
+  const itemData = await invModel.getInventoryById(inventory_id);
   const itemName = `${itemData.inv_make} ${itemData.inv_model}`;
   res.render("./inventory/delete-confirm", {
     title: "Delete " + itemName,

@@ -1,0 +1,42 @@
+<% if (title) { %>
+<!-- Page heading provided by the controller -->
+<h1><%= title %></h1>
+<% } else { /* If no title was provided, redirect back to the home page. This
+keeps the view from rendering when required context isn't available. */
+res.redirect('/') } %> <%- messages() %> <% if (errors) { %>
+<ul class="notice">
+  <% errors.array().forEach(error => { %>
+  <li><%= error.msg %></li>
+  <% }) %>
+</ul>
+<% } %>
+
+<div class="formContainer">
+  <div>
+    <h2>Confirm Vehicle Deletion</h2>
+    <p>
+      The vehicle information below will be permanently deleted and cannot be
+      recovered. Are you sure you want to delete this vehicle?
+    </p>
+  </div>
+  <form class="authForm" action="/inv/delete" method="post">
+    <fieldset>
+      <legend>Vehicle Information</legend>
+
+      <label for="inv_make">Make:</label>
+      <input id="inv_make" type="text" readonly value="<%= locals.inv_make %>" >
+
+      <label for="inv_model">Model:</label>
+      <input id="inv_model" type="text" readonly value="<%= locals.inv_model %>" >
+
+      <label for="inv_price">Price:</label>
+      <input id="inv_price" type="number" readonly value="<%= locals.inv_price %>" >
+
+      <label for="inv_year">Year:</label>
+      <input id="inv_year" type="number" readonly value="<%= locals.inv_year %>" >
+    </fieldset>
+
+    <button type="submit">Delete Vehicle</button>
+    <input type="hidden" name="inv_id" value="<%= locals.inv_id %>" >
+  </form>
+</div>
