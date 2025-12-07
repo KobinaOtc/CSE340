@@ -1,0 +1,77 @@
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else { /* If no title was provided, redirect back to the home page. This
+keeps the view from rendering when required context isn't available. */
+res.redirect('/') } %> <%- messages() %> <% if (errors) { %>
+<ul class="notice">
+  <% errors.array().forEach(error => { %>
+  <li><%= error.msg %></li>
+  <% }) %>
+</ul>
+<% } %>
+
+<div class="formContainer">
+  <h2>Update Account Information</h2>
+  <form id="updateForm" class="authForm" action="/account/update" method="post">
+    <label for="account_firstname">First Name:</label>
+    <input
+      type="text"
+      id="account_firstname"
+      name="account_firstname"
+      autocomplete="given-name"
+      required
+      value="<%= locals.account_firstname %>" >
+
+    <label for="account_lastname">Last Name:</label>
+    <input
+      type="text"
+      id="account_lastname"
+      name="account_lastname"
+      autocomplete="family-name"
+      required
+      value="<%= locals.account_lastname %>" >
+
+    <label for="account_email">Email Address:</label>
+    <input
+      type="email"
+      id="account_email"
+      name="account_email"
+      autocomplete="email"
+      required
+      value="<%= locals.account_email %>" >
+
+    <input type="hidden" name="account_id" value="<%= locals.account_id %>" >
+
+    <button type="submit" class="btn">Update Account</button>
+  </form>
+</div>
+
+<div class="formContainer">
+  <h2>Change Password</h2>
+  <p>
+    Passwords must be at least 12 characters and contain at least 1 uppercase, 1
+    lowercase, 1 number and 1 special character.
+  </p>
+  <form
+    id="passwordForm"
+    class="authForm"
+    action="/account/change-password"
+    method="post"
+  >
+    <label for="account_password">New Password:</label>
+    <input
+      type="password"
+      id="account_password"
+      name="account_password"
+      autocomplete="new-password"
+      required
+      pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,}$" >
+    <span id="pswdBtn">Show Password</span>
+
+    <input type="hidden" name="account_id" value="<%= locals.account_id %>" >
+
+    <button type="submit" class="btn">Change Password</button>
+  </form>
+</div>
+
+<!-- <script src="/js/password-toggle.js"></script> -->

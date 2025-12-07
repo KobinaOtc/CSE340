@@ -56,7 +56,7 @@ router.post(
 )
 
 // Build delete confirmation view route
-router.get("/delete/:inv_id", utilities.handleErrors(invController.buildDeleteInventory));
+router.get("/delete/:inv_id", utilities.handleErrors(invController.buildDeleteConfirmView));
 
 // POST request Route to process the deletion
 router.post("/delete", utilities.handleErrors(invController.deleteInventory));
