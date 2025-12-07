@@ -207,10 +207,14 @@ invCont.updateInventory = async function (req, res, next) {
 invCont.getInventoryJSON = async (req, res, next) => {
   const classification_id = parseInt(req.params.classification_id)
   const invData = await invModel.getInventoryByClassificationId(classification_id)
-  if (invData[0].inv_id) {
+  
+  // FIX: Safely check if the array has content before accessing the first element.
+  if (invData.length > 0) { 
     return res.json(invData)
   } else {
-    next(new Error("No data returned"))
+    // Instead of calling next(new Error(...)) which returns HTML, 
+    // return an empty JSON array, which is standard for an API with no results.
+    return res.json([])
   }
 }
 

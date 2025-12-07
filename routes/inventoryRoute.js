@@ -5,6 +5,13 @@ const invController = require("../controllers/invController")
 const utilities =require('../utilities')
 const invVal = require("../utilities/inventory-validation")
 
+// Get inventory JSON (protected)
+router.get(
+  "/getInventory/:classification_id",
+//   utilities.checkAccountType,
+  utilities.handleErrors(invController.getInventoryJSON)
+)
+
 // Route to build inventory by classification view
 router.get("/type/:classificationId", utilities.handleErrors(invController.buildByClassificationId));
 
@@ -34,13 +41,6 @@ router.post(
     invVal.newVehicleRules(),
     invVal.checkNewVehicleData,
     utilities.handleErrors(invController.newVehicle)
-)
-
-// Get inventory JSON (protected)
-router.get(
-  "/getInventory/:classification_id",
-  utilities.checkAccountType,
-  utilities.handleErrors(invController.getInventoryJSON)
 )
 
 // Route to build edit view by inventory ID
