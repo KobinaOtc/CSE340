@@ -89,6 +89,37 @@ validate.loginRules = () => {
 }
 
 /* ******************************
+ * Update Account Validation Rules
+ * ***************************** */
+validate.updateAccountRules = () => {
+  return [
+    body("account_firstname")
+      .trim()
+      .isLength({ min: 1 })
+      .withMessage("Please provide a first name."),
+
+    body("account_lastname")
+      .trim()
+      .isLength({ min: 1 })
+      .withMessage("Please provide a last name."),
+
+    body("account_email")
+      .trim()
+      .isEmail()
+      .normalizeEmail()
+      .withMessage("A valid email is required.")
+      .custom(async (account_email, { req }) => {
+        const account_id = req.body.account_id
+        const account = await accountModel.getAccountByEmail(account_email)
+        // Check if email exists AND belongs to a different account
+        if (account && account.account_id != account_id) {
+          throw new Error("Email exists. Please use a different email")
+        }
+      }),
+  ]
+}
+
+/* ******************************
  * Check data and return errors or continue to registration
  * ***************************** */
 validate.checkRegData = async (req, res, next) => {
@@ -128,6 +159,30 @@ validate.checkLogData = async (req, res, next) => {
         return
     }
     next()
+}
+
+/* ******************************
+ * Check data and return errors or continue to update account
+ * ***************************** */
+validate.checkUpdateData = async (req, res, next) => {
+  const { account_firstname, account_lastname, account_email, account_id } =
+    req.body
+  let errors = []
+  errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav()
+    res.render("account/update", {
+      errors,
+      title: "Update Account Information",
+      nav,
+      account_firstname,
+      account_lastname,
+      account_email,
+      account_id,
+    })
+    return
+  }
+  next()
 }
 
 module.exports = validate
