@@ -4,4 +4,55 @@
     res.redirect('/')
 } %>
 
+<%- messages() %> 
+<% if (errors) { %>
+  <ul class="notice">
+    <% errors.array().forEach(error => { %>
+      <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+<% } %>
+
 <%- card %>
+
+<section class="inquiry-section">
+    <h2>Inquire About This Vehicle</h2>
+    
+    <% if (locals.loggedin) { %>
+        <p>Contact us about the <%= locals.title %>.</p>
+        
+        <form class="authForm" action="/message/send-inquiry" method="POST">
+            <fieldset>
+                <legend>Send an Inquiry</legend>
+
+                <label for="message_subject">Subject:</label>
+                <input
+                    type="text"
+                    id="message_subject"
+                    name="message_subject"
+                    required
+                    minlength="5"
+                    maxlength="100"
+                    placeholder="e.g., Question about price"
+                    value="<%= locals.message_subject %>" 
+                />
+
+                <label for="message_body">Message:</label>
+                <textarea
+                    id="message_body"
+                    name="message_body"
+                    required
+                    minlength="10"
+                    placeholder="Enter your detailed question here..."
+                ><%= locals.message_body %></textarea>
+
+                <button type="submit">Send Inquiry</button>
+                
+                <input type="hidden" name="inv_id" value="<%= locals.inv_id %>">
+            </fieldset>
+        </form>
+
+    <% } else { %>
+        <p class="notice">You must be logged in to send an inquiry. Please <a href="/account/login">log in</a> or <a href="/account/register">register</a> an account.</p>
+    <% } %>
+</section>
