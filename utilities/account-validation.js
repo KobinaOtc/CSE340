@@ -120,6 +120,24 @@ validate.updateAccountRules = () => {
 }
 
 /* ******************************
+ * Password Change Validation Rules
+ * ***************************** */
+validate.passwordChangeRules = () => {
+  return [
+    body("account_password")
+      .trim()
+      .isStrongPassword({
+        minLength: 12,
+        minLowercase: 1,
+        minUppercase: 1,
+        minNumbers: 1,
+        minSymbols: 1,
+      })
+      .withMessage("Password does not meet requirements."),
+  ]
+}
+
+/* ******************************
  * Check data and return errors or continue to registration
  * ***************************** */
 validate.checkRegData = async (req, res, next) => {
@@ -180,6 +198,30 @@ validate.checkUpdateData = async (req, res, next) => {
       account_email,
       account_id,
     })
+    return
+  }
+  next()
+}
+
+/* ******************************
+ * Check password data and return errors or continue to change password
+ * ***************************** */
+validate.checkPasswordData = async (req, res, next) => {
+  const { account_id } = req.body
+  let errors = [];
+  errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav();
+    const accountData = req.session.accountData;
+    res.render("account/update", {
+      errors,
+      title: "Update Account Information",
+      nav,
+      account_firstname: accountData.account_firstname,
+      account_lastname: accountData.account_lastname,
+      account_email: accountData.account_email,
+      account_id,
+    });
     return
   }
   next()

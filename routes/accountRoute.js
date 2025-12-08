@@ -45,4 +45,13 @@ router.post(
 
 router.get('/logout', utilities.handleErrors(accountController.accountLogout))
 
+// Process password change
+router.post(
+  "/change-password",
+  utilities.checkLogin,
+  regValidate.passwordChangeRules(),
+  regValidate.checkPasswordData,
+  utilities.handleErrors(accountController.changePassword)
+);
+
 module.exports = router;
