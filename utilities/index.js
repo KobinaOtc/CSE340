@@ -131,18 +131,78 @@ Util.buildClassList = async function (classification_id = null) {
     return classList
 }
 
+/* **************************************
+ * Build the message inbox HTML Table
+ * ************************************ */
+Util.buildInboxTable = async function (data) {
+    let table = '<table>';
+    
+    if (data.length === 0) {
+        table += '<thead><tr><th>Inbox Empty</th></tr></thead>';
+        table += '<tbody><tr><td>There are no new inquiries in your inbox.</td></tr></tbody>';
+        table += '</table>';
+        return table;
+    }
+
+    // Set up the table header
+    table += '<thead>';
+    table += '<tr>';
+    table += '<th>Subject</th>';
+    table += '<th>Vehicle</th>';
+    table += '<th>Sender</th>';
+    table += '<th>Received</th>';
+    table += '<th>Action</th>';
+    table += '</tr>';
+    table += '</thead>';
+    // Set up the table body
+    table += '<tbody>';
+    
+    // Iterate over all messages in the array and put each in a row
+    data.forEach(function (message) {
+        // Format the date for better display
+        const dateOptions = { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric' };
+        const formattedDate = new Date(message.message_created).toLocaleDateString("en-US", dateOptions);
+        
+        // Determine the class/style based on read status
+        const rowClass = message.message_is_read ? 'read' : 'unread';
+        
+        table += `<tr class="${rowClass}">`;
+        
+        // Subject - link to a detail view
+        table += `<td><a href="/message/detail/${message.message_id}" title="View Message">${message.message_subject}</a></td>`;
+        
+        // Vehicle - link to the vehicle detail page
+        table += `<td><a href="/inv/detail/${message.inv_id}">${message.inv_make} ${message.inv_model}</a></td>`;
+        
+        // Sender
+        table += `<td>${message.account_firstname} ${message.account_lastname}</td>`;
+        
+        // Received Date
+        table += `<td>${formattedDate}</td>`;
+
+        // Action links (placeholders for future implementation)
+        table += `<td><a href="/message/mark-read/${message.message_id}" title="Mark as Read/Unread">Mark Read</a> | <a href="/message/delete/${message.message_id}" title="Delete Message">Delete</a></td>`;
+        
+        table += '</tr>';
+    });
+    table += '</tbody>';
+    table += '</table>';
+
+    return table;
+}
+
 /* ****************************************
  * Check Login - requires valid JWT
  **************************************** */
 Util.checkLogin = (req, res, next) => {
   console.log(res.locals.loggedin)
     if (res.locals.loggedin) {
-        next();
+        next()
     } else {
-        req.flash("notice", "Please log in.");
-        return res.redirect("/account/login");
+        req.flash("notice", "Please log in.")
+        return res.redirect("/account/login")
     }
-};
+}
 
 /* ****************************************
 * Middleware to check token validity
@@ -154,17 +214,17 @@ Util.checkJWTToken = (req, res, next) => {
       process.env.ACCESS_TOKEN_SECRET,
       function (err, accountData) {
         if (err) {
-          req.flash("notice", "Please log in");
-          res.clearCookie("jwt");
-          return res.redirect("/account/login");
+          req.flash("notice", "Please log in")
+          res.clearCookie("jwt")
+          return res.redirect("/account/login")
         }
         res.locals.accountData = accountData;
-        res.locals.loggedin = 1;
-        next();
+        res.locals.loggedin = 1
+        next()
       }
     );
   } else {
-    next();
+    next()
   }
 }
 
@@ -175,21 +235,21 @@ Util.checkJWTToken = (req, res, next) => {
 
 Util.checkAccountType = (req, res, next) => {
   if (res.locals.loggedin) {
-    const accountType = res.locals.accountData.account_type;
+    const accountType = res.locals.accountData.account_type
     if (accountType === "Employee" || accountType === "Admin") {
-      next();
+      next()
     } else {
       req.flash(
         "notice",
         "You do not have permission to access this resource."
-      );
-      return res.redirect("/account/login");
+      )
+      return res.redirect("/account/login")
     }
   } else {
     req.flash("notice", "Please log in with an authorized account.");
-    return res.redirect("/account/login");
+    return res.redirect("/account/login")
   }
-};
+}
 
 /* ****************************************
  * Middleware For Handling Errors
