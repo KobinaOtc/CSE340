@@ -148,6 +148,7 @@ async function buildUpdateAccount(req, res, next) {
   let nav = await utilities.getNav();
   const accountId = parseInt(req.params.accountId);
 
+  console.log(req.session.accountData)
   // Verify that the logged-in user matches the account being updated
   if (
     req.session.accountData &&

@@ -135,6 +135,7 @@ Util.buildClassList = async function (classification_id = null) {
  * Check Login - requires valid JWT
  **************************************** */
 Util.checkLogin = (req, res, next) => {
+  console.log(res.locals.loggedin)
     if (res.locals.loggedin) {
         next();
     } else {
