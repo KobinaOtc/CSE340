@@ -147,20 +147,20 @@ async function accountLogout(req, res, next) {
 async function buildUpdateAccount(req, res, next) {
   let nav = await utilities.getNav();
   const accountId = parseInt(req.params.accountId);
-
-  console.log(req.session.accountData)
+  console.log(req.params)
+  const accountData = res.locals.accountData
   // Verify that the logged-in user matches the account being updated
   if (
-    req.session.accountData &&
-    req.session.accountData.account_id === accountId
+    accountData &&
+    accountData.account_id === accountId
   ) {
     res.render("account/update", {
       title: "Update Account Information",
       nav,
       errors: null,
-      account_firstname: req.session.accountData.account_firstname,
-      account_lastname: req.session.accountData.account_lastname,
-      account_email: req.session.accountData.account_email,
+      account_firstname: accountData.account_firstname,
+      account_lastname: accountData.account_lastname,
+      account_email: accountData.account_email,
       account_id: accountId,
     });
   } else {
