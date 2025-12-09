@@ -33,6 +33,7 @@ body {
 .siteName a, #tools a {
   text-decoration: none;
   color: var(--second-color);
+  padding-left: 10px;
 }
 
 /* Navigation styles start */
@@ -413,20 +414,20 @@ input[type="submit"]:hover {
 /* Style for the submit button - Ensure button styling is correct (full width) */
 button[type="submit"], 
 input[type="submit"] {
-    background-color: var(--primary-color);
-    color: var(--second-color);
-    padding: 12px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1.1em;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-    width: 100%; /* Make button full width like inputs */
+  background-color: var(--primary-color);
+  color: var(--second-color);
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1.1em;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  width: 100%; /* Make button full width like inputs */
 }
 button[type="submit"]:hover,
 input[type="submit"]:hover {
-    background-color: #0099cc;
+  background-color: #0099cc;
 }
 
 /* Link/text below the form */
@@ -445,34 +446,282 @@ input[type="submit"]:hover {
 
 input:required:invalid:not(:placeholder-shown),
 textarea:required:invalid:not(:placeholder-shown) {
-    border: 2px solid #ff0000 !important; /* Red border for invalid */
-    box-shadow: 0 0 5px rgba(255, 0, 0, 0.5) !important; /* Red glow */
+  border: 2px solid #ff0000 !important; /* Red border for invalid */
+  box-shadow: 0 0 5px rgba(255, 0, 0, 0.5) !important; /* Red glow */
 }
 
 select:required:invalid {
-    border: 2px solid #ff0000 !important;
+  border: 2px solid #ff0000 !important;
 }
 
 input:focus:invalid,
 textarea:focus:invalid,
 select:focus:invalid {
-    border: 2px solid #ff0000 !important;
-    box-shadow: 0 0 5px rgba(255, 0, 0, 0.5) !important;
+  border: 2px solid #ff0000 !important;
+  box-shadow: 0 0 5px rgba(255, 0, 0, 0.5) !important;
 }
 
 input:required:valid,
 textarea:required:valid,
 select:required:valid {
-    border: 2px solid #00aa00 !important; /* Green border for valid */
-    box-shadow: none !important;
+  border: 2px solid #00aa00 !important; /* Green border for valid */
+  box-shadow: none !important;
 }
 
 input:required:valid:focus,
 textarea:required:valid:focus,
 select:required:valid:focus {
-    box-shadow: 0 0 5px rgba(0, 170, 0, 0.5) !important; 
+  box-shadow: 0 0 5px rgba(0, 170, 0, 0.5) !important; 
 }
 /* --- VALID/INVALID INPUT STYLES END --- */
+
+/* --- ACCOUNT MANAGEMENT STYLES START --- */
+
+/* Style for the H3 management headings (Inventory Management, Messaging) */
+h3 {
+  font-size: 1.3em;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  color: var(--second-color);
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+}
+
+/* Style the anchor links within the management paragraphs */
+.inventory-management-links a,
+.messaging-links a {
+  display: inline-block; 
+  color: var(--primary-color); /* Bright Blue Link Text */
+  font-weight: 500;
+  font-size: 1.1em;
+  padding: 5px 0;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+/* Highlight effect on hover */
+.inventory-management-links a:hover,
+.messaging-links a:hover {
+  color: var(--second-color); /* Darken text on hover */
+  border-bottom: 2px solid var(--primary-color); /* Underline with primary color */
+}
+
+/* Optional: Styling for the inbox table for clarity (required by the feature) */
+#inbox-display table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1em;
+}
+
+#inbox-display th, #inbox-display td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+#inbox-display thead {
+  background-color: var(--second-color); /* Dark header */
+  color: var(--accent-text-color);
+}
+
+/* Visual cue for unread messages */
+#inbox-display tr.unread {
+  font-weight: bold;
+  background-color: #fff0d9; 
+}
+/* --- ACCOUNT MANAGEMENT STYLES END --- */
+
+
+/* --- VEHICLE MANAGEMENT STYLES START --- */
+
+/* Style the container holding the "Add" links */
+.inventory-management-links {
+  list-style-type: none; /* Remove default bullets */
+  padding-left: 0; /* Remove default padding for lists */
+  margin-top: 1.5em;
+  margin-bottom: 2em;
+  /* Adding a subtle border line under the navigation links */
+  border-bottom: 1px solid #eee; 
+  padding-bottom: 15px;
+}
+
+/* Ensure list items stack cleanly */
+.inventory-management-links li {
+  display: block; 
+  margin-bottom: 8px;
+}
+
+/* Apply separator line and bold color to the main section heading (Manage Inventory) */
+h2 {
+  font-size: 1.3em;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  color: var(--second-color);
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+}
+
+/* Ensure the existing links look correct (styles added in previous steps also apply here) */
+.inventory-management-links a {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+/* Add margin below the dropdown/select box before the table begins */
+/* Note: This is generic and may affect other <p> + <div> combinations, but targets the space before #inventoryDisplay */
+.inventory-management-view p + div {
+  margin-bottom: 2em; 
+}
+/* --- VEHICLE MANAGEMENT STYLES END --- */
+
+
+/* --- INVENTORY DISPLAY TABLE STYLES START --- */
+#inventoryDisplay {
+  width: 100%;
+  border-collapse: collapse; /* For a clean look */
+  margin-top: 1.5em;
+  font-size: 1em;
+  border: 1px solid #ccc; /* Outer border */
+}
+
+/* Style the Table Header */
+#inventoryDisplay thead {
+  background-color: var(--second-color); /* Dark header background */
+  color: var(--accent-text-color); /* White text */
+}
+
+#inventoryDisplay th {
+  padding: 12px 10px;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid var(--primary-color); /* Blue line separator */
+}
+
+/* Style the Table Body Rows */
+#inventoryDisplay tbody tr {
+  border-bottom: 1px solid #eee; /* Light row separator */
+}
+
+/* Subtle zebra striping for readability */
+#inventoryDisplay tbody tr:nth-child(even) {
+  background-color: #f7f7f7; 
+}
+
+#inventoryDisplay td {
+  padding: 10px;
+  /* Remove default cell border, rely on row border */
+}
+
+/* Style the action columns (Modify/Delete) for alignment */
+#inventoryDisplay td:nth-child(2),
+#inventoryDisplay td:nth-child(3) {
+  width: 80px; /* Fixed width for consistent alignment */
+  text-align: center;
+}
+
+/* Style the links within the table (Modify/Delete) */
+#inventoryDisplay a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+#inventoryDisplay a:hover {
+  color: #0088cc; 
+  text-decoration: underline;
+}
+/* --- INVENTORY DISPLAY TABLE STYLES END --- */
+
+/* --- MESSAGE STYLES START --- */
+
+/* --- General Message Page Containers --- */
+
+/* Style the Inquiry section container on the vehicle details page */
+.inquiry-section {
+  margin-top: 2em;
+  padding-top: 1em;
+  border-top: 1px solid #ccc; /* Visual separation from vehicle card */
+}
+
+/* Style the main container for the Message Detail View */
+.message-detail-container {
+  max-width: 800px;
+  margin: 2em 0;
+  padding: 1.5em;
+  background-color: var(--accent-text-color); /* White background */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Style the Subject header in the detail view */
+.message-detail-container h2 {
+  font-size: 1.5em;
+  color: var(--second-color);
+  margin-bottom: 0.5em;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+}
+
+/* --- Message Meta Data --- */
+
+/* Style the meta information (From, Vehicle, Received) */
+.message-meta {
+  font-size: 0.95em;
+  margin-bottom: 0.75em;
+  color: #555;
+}
+
+/* Style the actual message body area */
+.message-body {
+  padding: 1em 0;
+  line-height: 1.6;
+  font-size: 1.1em;
+  white-space: pre-wrap; /* Preserve original message formatting */
+}
+
+/* --- Action Buttons --- */
+
+.message-actions {
+  margin-top: 2em;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+/* Re-apply button styling to action links (Mark Read/Delete) */
+.message-actions .btn,
+.message-actions a {
+  background-color: var(--primary-color);
+  color: var(--second-color);
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+/* Styling for the Delete button (Red for danger) */
+.message-actions .btn-delete {
+  background-color: #f44336; 
+  color: var(--accent-text-color); 
+}
+
+.message-actions .btn-delete:hover {
+  background-color: #d32f2f;
+}
+
+.message-actions .btn:hover {
+  background-color: #0099cc;
+}
+
+/* --- MESSAGE STYLES END --- */
+
+
 
 footer {
   padding: 30px;
@@ -528,6 +777,12 @@ footer {
 
   .image-column img {
     max-width: 100%;
+  }
+
+  #inventoryDisplay {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
   }
 
   /* Footer styles start */
