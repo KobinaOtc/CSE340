@@ -1,0 +1,38 @@
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<%- messages() %>
+
+<% if (messageData) { %>
+    <div class="message-detail-container">
+        <h2>Subject: <%= messageData.message_subject %></h2>
+        <p class="message-meta">
+            <strong>From:</strong> <%= messageData.account_firstname %> <%= messageData.account_lastname %> (<%= messageData.account_email %>)
+        </p>
+        <p class="message-meta">
+            <strong>Regarding Vehicle:</strong> <a href="/inv/detail/<%= messageData.inv_id %>"><%= messageData.inv_make %> <%= messageData.inv_model %></a>
+        </p>
+        <p class="message-meta">
+            <strong>Received:</strong> <%= messageData.message_created.toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' }) %>
+        </p>
+        <hr>
+        
+        <div class="message-body">
+            <p><%= messageData.message_body %></p>
+        </div>
+
+        <div class="message-actions">
+            <a href="/message/mark-read/<%= messageData.message_id %>" class="btn">
+                Mark as <%= messageData.message_is_read ? 'Unread' : 'Read' %>
+            </a>
+            <a href="/message/delete/<%= messageData.message_id %>" class="btn btn-delete">
+                Delete Message
+            </a>
+        </div>
+    </div>
+<% } else { %>
+    <p class="notice">Message details could not be loaded.</p>
+<% } %>

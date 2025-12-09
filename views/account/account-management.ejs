@@ -1,8 +1,9 @@
 <% if (title) { %>
-<!-- Page heading provided by the controller -->
 <h1><%= title %></h1>
-<% } else { /* If no title was provided, redirect back to the home page. This
-keeps the view from rendering when required context isn't available. */
+<% } else { /* If no title was provided, redirect back to the home page.
+This
+keeps the view from rendering when required context isn't available.
+*/
 res.redirect('/') } %> <%- messages() %> <% if (errors) { %>
 <ul class="notice">
   <% errors.array().forEach(error => { %>
@@ -11,17 +12,14 @@ res.redirect('/') } %> <%- messages() %> <% if (errors) { %>
 </ul>
 <% } %>
 
-<!-- <p>You're Logged in</p> -->
-
 <% if (accountData) { %>
 <h2>Welcome <%= accountData.account_firstname %></h2>
 
 <p class="inventory-management-links">
-  <a
-    href="/account/update/<%= accountData.account_id %>"
-    title="Update Account Information"
-    >Update Account Information</a
-  >
+  <a href="/account/update/<%= accountData.account_id %>"
+    title="Update Account Information">
+    Update Account Information
+  </a>
 </p>
 
 <% if (accountData.account_type === 'Employee' || accountData.account_type ===
@@ -30,6 +28,12 @@ res.redirect('/') } %> <%- messages() %> <% if (errors) { %>
 <p class="inventory-management-links">
   <a href="/inv" title="Manage Inventory">Manage Inventory</a>
 </p>
+
+<h3>Messaging</h3>
+<p class="messaging-links">
+  <a href="/message" title="View Client Inquiries">Message Inbox</a>
+</p>
+
 <% } %> <% } else { %>
 <p>Please <a href="/account/login">log in</a> to access your account.</p>
 <% } %>
